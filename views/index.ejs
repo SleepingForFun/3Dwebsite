@@ -2,3 +2,14 @@
     <h1>Welcome to 3D Imagination</h1>
     <p>Site is under development</p>
     
+    
+    <h1><%= items %></h1>
+<hr>
+<p>Items</p>
+<% for(let i = 0; i < items.length; i++) { %>
+  <product>
+    <h2><%= items[i].title %></h1>
+    <p><%= items[i].author %></p>
+    <p><%= items[i].publishedAt %></p>
+  </product>
+<% } %>
