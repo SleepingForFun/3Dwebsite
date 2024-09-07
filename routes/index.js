@@ -1,34 +1,26 @@
 var express = require('express');
 var router = express.Router();
 router.get('/', function(req, res, next) {
-let itemlist = [
- {
- title: 'Helmet',
- author: 'Choose selected',
- publishedAt: new Date('2020-01-20'),
- },
- {
- title: 'Small Toys',
- author: 'Choose selected',
- publishedAt: new Date('2019-12-18'),
- },
- {
- title: 'Cosplay Stuff',
- author: 'Choose selected',
- publishedAt: new Date('2020-05-17'),
- },
- {
-    title: 'Hand Held',
-    author: 'Choose selected',
-    publishedAt: new Date('2020-05-12'),
-    },
-    {
-        title: 'Items',
-        author: 'Choose selected',
-        publishedAt: new Date('2020-05-11'),
-        }
- 
- ]
- res.render('index', { items: itemlist});
+
+let query = "SELECT product_id, productname, prodimage, description, package_id, prodcolor, category_id, saleprice, status FROM product WHERE homepage = 1";
+// execute query
+db.query(query, (err, result) => {
+if (err) {
+console.log(err);
+res.render('error');
+}
+
+let query= "select promotitle, promoimage from promotion where startdate <= current_date() and enddate >= current_date()";
+
+db.query(query, (err, result2) => {
+    if (err){
+        console.log(err);
+        res.render('error');
+    }
+    res.render('index', {allrecs: result, promos: result2});
+});
+
+    
+});
 });
 module.exports = router;

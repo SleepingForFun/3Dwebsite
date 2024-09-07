@@ -1,15 +1,44 @@
 
-    <h1>Welcome to 3D Imagination</h1>
-    <p>Site is under development</p>
+    <table boarder="'1">
+      <tr>
+        <td width = '80%'>
+            
+
+        
     
-    
-    <h1><%= items %></h1>
-<hr>
-<p>Items</p>
-<% for(let i = 0; i < items.length; i++) { %>
-  <product>
-    <h2><%= items[i].title %></h1>
-    <p><%= items[i].author %></p>
-    <p><%= items[i].publishedAt %></p>
-  </product>
-<% } %>
+        
+        <h1>Welcome to 3D Imagination</h1>
+        <p>Site is under development</p>
+        
+        
+        <% if (allrecs.length > 0) {%>
+          
+          <% allrecs.forEach((recref, index) => { %>
+            <product>
+              <table>
+              <tr> <td colspan="2"><%= recref.productname %></td></tr>
+              <tr> <td colspan="2"><%= recref.prodimage %></td></tr>
+              <tr> <td colspan="2"><%= recref.description %></td></tr>
+              <tr> <td><%= recref.package_id %> </td> <td><%=
+              recref.category_id %></td> </tr>
+              <tr> <td><%= recref.prodcolor %></td> <td><%= recref.saleprice
+              %></td></tr>
+              <tr> <td><%= recref.status %></td>
+              <td><a href='/product/<%= recref.product_id%>/show'>Details</a></td></tr>
+              </table>
+              </product>
+          <% }); %>
+          <% } else { %>
+          <p>Not Records Available</p>
+          <% } %>
+          </td>
+          
+          <td width ='20%'>
+            promos
+            <% promos.forEach((recref, index) => { %>
+                <figure> <img src='images/<%= recref.promoimage %>'></figure>
+            <%}); %>
+
+          </td>
+        </tr>
+        </table>

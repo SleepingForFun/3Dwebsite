@@ -6,6 +6,7 @@ var logger = require('morgan');
 var layouts = require('express-ejs-layouts');
 const dotenv = require ('dotenv');
 dotenv.config();
+const session = require('express-session');
 
 const mariadb = require('mariadb/callback');
 const db = mariadb.createConnection({host: process.env.DB_HOST,
@@ -36,6 +37,9 @@ var helpRouter = require('./routes/help');
 var productRouter = require('./routes/product');
 var saleorderRouter = require('./routes/saleorder');
 var customerRouter = require('./routes/customer');
+var searchRouter = require('./routes/search');
+var reportsRouter = require('./routes/report');
+var catalogRouter = require('./routes/catalog');
 
 
 var app = express();
@@ -45,6 +49,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(layouts);
+
+app.use(session({secret: '3DAppSecretprinting'}));
+app.use(function(req,res,next){
+res.locals.session = req.session;
+next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -61,6 +71,12 @@ app.use('/help', helpRouter);
 app.use('/product', productRouter);
 app.use('/saleorder', saleorderRouter);
 app.use('/customer', customerRouter);
+app.use('/search', searchRouter);
+app.use('/report', reportsRouter);
+app.use('/catalog', catalogRouter);
+
+
+
 
 
 

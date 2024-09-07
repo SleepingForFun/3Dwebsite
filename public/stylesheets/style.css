@@ -63,8 +63,16 @@ h1{
       background: lightblue;
       min-width: 200px;
       max-width: 200px;
-      min-height: 250px;
-      max-height: 250px;
+      min-height: 300px;
+      max-height: 300px;
       border-radius: 5px;
       padding: 5px;
+      }
+
+      label { width: 200px; height: 100px;
+      
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
       }

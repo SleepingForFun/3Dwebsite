@@ -51,5 +51,35 @@ router.post('/', function(req, res, next) {
     }
     });
     });
-    
+     // ==================================================
+// Route to delete one specific record.
+// ==================================================
+router.get('/:recordid/delete', function(req, res, next) {
+    let query = "DELETE FROM saleorder WHERE order_id = " + req.params.recordid;
+    // execute query
+    db.query(query, (err, result) => {
+    if (err) {
+    console.log(err);
+    res.render('error');
+    } else {
+    res.redirect('/saleorder');
+    }
+    });
+    });
+
+    // ==================================================
+// Route to edit one specific record.
+// ==================================================
+router.get('/:recordid/edit', function(req, res, next) {
+    let query = "SELECT order_id, customer_id, saledate, paymentstatus, customernotes,authorizationnum FROM saleorder WHERE order_id = " + req.params.recordid;
+    // execute query
+    db.query(query, (err, result) => {
+    if (err) {
+    console.log(err);
+    res.render('error');
+    } else {
+    res.render('saleorder/editrec', {onerec: result[0] });
+    }
+    });
+    });
 module.exports = router;
